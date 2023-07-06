@@ -18,11 +18,9 @@ export default function LoginPage() {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
-      console.log("Login success", response.data);
       toast.success("Login success");
       router.push("/profile");
     } catch (error: any) {
-      console.log("Login failed", error.message);
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -42,7 +40,7 @@ export default function LoginPage() {
       <h1>{loading ? "Processing" : "Login"}</h1>
       <hr />
 
-      <label htmlFor="email">email</label>
+      <label className="mt-4" htmlFor="email">email</label>
       <input
         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
         id="email"
@@ -60,9 +58,10 @@ export default function LoginPage() {
         onChange={(e) => setUser({ ...user, password: e.target.value })}
         placeholder="password"
       />
+      <Link href="/forgotpassword">Forgot Password</Link>
       <button
         onClick={onLogin}
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+        className="p-2 border border-gray-300 rounded-lg mb-4 mt-4 focus:outline-none focus:border-gray-600"
       >
         {buttonDisabled ? "No login" : "Login"}
       </button>
